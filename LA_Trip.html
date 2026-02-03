@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LA 洛杉磯夢幻之旅 2026</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Noto Sans TC', sans-serif; background-color: #F3F4F6; }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .gradient-text {
+            background: linear-gradient(to right, #2563EB, #9333EA);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+    </style>
+</head>
+<body class="pb-20">
+
+    <header class="fixed top-0 w-full z-50 bg-white/90 backdrop-blur-md shadow-sm border-b border-gray-100">
+        <div class="max-w-md mx-auto px-4 py-3 flex justify-between items-center">
+            <div>
+                <h1 class="text-xl font-bold text-gray-800">🇺🇸 洛杉磯之旅</h1>
+                <p class="text-xs text-gray-500">2026.02.06 - 02.13</p>
+            </div>
+            <div class="bg-blue-100 text-blue-600 px-3 py-1 rounded-full text-xs font-bold">
+                7 Days
+            </div>
+        </div>
+    </header>
+
+    <div class="max-w-md mx-auto mt-20 px-4">
+        <div class="bg-blue-600 text-white rounded-2xl p-4 shadow-lg mb-6 relative overflow-hidden">
+            <div class="absolute top-0 right-0 opacity-10 transform translate-x-4 -translate-y-4">
+                <i class="fa-solid fa-house-chimney text-9xl"></i>
+            </div>
+            <div class="relative z-10">
+                <h2 class="text-sm opacity-90 mb-1">🏠 我們的住宿基地</h2>
+                <p class="font-bold text-lg mb-3">Pasadena Home</p>
+                <button onclick="openMap('3510 Milton street, pasadena')" 
+                        class="bg-white text-blue-600 hover:bg-gray-100 text-sm font-bold py-2 px-4 rounded-xl shadow-sm flex items-center gap-2 transition-all w-full justify-center">
+                    <i class="fa-solid fa-location-arrow"></i> 導航回家
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div id="itinerary-container" class="max-w-md mx-auto px-4 space-y-6">
+        </div>
+
+    <div class="text-center text-gray-400 text-xs py-8">
+        Designed for Your LA Trip
+    </div>
+
+    <script>
+        // 行程資料結構
+        const itinerary = [
+            {
+                date: "2/6 (五)",
+                theme: "抵達日",
+                icon: "fa-plane-arrival",
+                color: "text-gray-600",
+                events: [
+                    { time: "19:00", title: "抵達 LAX 機場", loc: "Los Angeles International Airport", note: "取車後前往住宿" },
+                    { time: "21:00", title: "入住 Pasadena", loc: "3510 Milton street, pasadena", note: "休息調整時差" }
+                ]
+            },
+            {
+                date: "2/7 (六)",
+                theme: "好萊塢 + NBA 球賽",
+                icon: "fa-basketball",
+                color: "text-purple-600",
+                highlight: true,
+                events: [
+                    { time: "08:30", title: "好萊塢標誌", loc: "Lake Hollywood Park", note: "早晨光線最美，人少" },
+                    { time: "11:00", title: "星光大道 & 中國戲院", loc: "TCL Chinese Theatre", note: "快速打卡參觀" },
+                    { time: "15:00", title: "抵達球場周邊 (L.A. LIVE)", loc: "L.A. Live", note: "提早停車，全家晚餐" },
+                    { time: "16:30", title: "NBA 進場 (爸+大兒)", loc: "Crypto.com Arena", note: "17:30 比賽開始 vs 勇士" },
+                    { time: "17:30", title: "媽媽弟弟行程", loc: "The Grammy Museum", note: "或去 Salt & Straw 吃冰淇淋" }
+                ]
+            },
+            {
+                date: "2/8 (日)",
+                theme: "藝術與海灘日落",
+                icon: "fa-palette",
+                color: "text-orange-500",
+                events: [
+                    { time: "10:30", title: "蓋蒂中心 (需預約)", loc: "The Getty Center", note: "欣賞建築與藝術品" },
+                    { time: "15:30", title: "Santa Monica 碼頭", loc: "Santa Monica Pier", note: "66號公路終點、看夕陽" }
+                ]
+            },
+            {
+                date: "2/9 (一)",
+                theme: "環球影城冒險",
+                icon: "fa-wand-magic-sparkles",
+                color: "text-blue-500",
+                events: [
+                    { time: "08:30", title: "環球影城", loc: "Universal Studios Hollywood", note: "瑪利歐園區、哈利波特" },
+                    { time: "19:00", title: "CityWalk 逛街", loc: "Universal CityWalk Hollywood", note: "影城結束後晚餐" }
+                ]
+            },
+            {
+                date: "2/10 (二)",
+                theme: "博物館與購物",
+                icon: "fa-car",
+                color: "text-red-500",
+                events: [
+                    { time: "10:00", title: "彼得森汽車博物館", loc: "Petersen Automotive Museum", note: "車迷必去" },
+                    { time: "13:00", title: "LACMA 燈柱", loc: "Urban Light", note: "就在對面，網美照必拍" },
+                    { time: "15:00", title: "農夫市場 & The Grove", loc: "The Original Farmers Market", note: "搭乘復古電車、購物" }
+                ]
+            },
+            {
+                date: "2/11 (三)",
+                theme: "迪士尼樂園",
+                icon: "fa-fort-awesome",
+                color: "text-pink-500",
+                highlight: true,
+                events: [
+                    { time: "07:00", title: "出發 (避開塞車)", loc: "Disneyland Park", note: "全日遊玩 + 煙火秀" }
+                ]
+            },
+            {
+                date: "2/12 (四)",
+                theme: "市中心與百萬夜景",
+                icon: "fa-city",
+                color: "text-indigo-600",
+                events: [
+                    { time: "10:00", title: "中央市場 (Eggslut)", loc: "Grand Central Market", note: "吃知名漢堡早午餐" },
+                    { time: "12:00", title: "天使鐵路", loc: "Angels Flight Railway", note: "La La Land 場景" },
+                    { time: "14:00", title: "The Broad (需預約)", loc: "The Broad", note: "當代藝術、草間彌生" },
+                    { time: "18:00", title: "格里斐斯天文台", loc: "Griffith Observatory", note: "俯瞰洛杉磯絕美夜景" }
+                ]
+            },
+            {
+                date: "2/13 (五)",
+                theme: "告別洛杉磯",
+                icon: "fa-plane-departure",
+                color: "text-gray-500",
+                events: [
+                    { time: "09:00", title: "Pasadena 悠閒早餐", loc: "Old Pasadena", note: "最後漫步老城區" },
+                    { time: "13:30", title: "出發前往機場", loc: "Los Angeles International Airport", note: "週五極易塞車，請準時" }
+                ]
+            }
+        ];
+
+        // Google Map 開啟函式
+        function openMap(location) {
+            const query = encodeURIComponent(location);
+            // 使用 universal link 格式，手機會嘗試打開 App
+            window.location.href = `https://www.google.com/maps/search/?api=1&query=${query}`;
+        }
+
+        // 渲染行程卡片
+        const container = document.getElementById('itinerary-container');
+
+        itinerary.forEach((day, index) => {
+            const isToday = false; // 實際使用可加入日期判斷邏輯
+            
+            let eventsHtml = day.events.map(event => `
+                <div class="flex gap-4 items-start relative pl-4 pb-6 last:pb-0 border-l-2 border-gray-100 last:border-0 group">
+                    <div class="absolute -left-[9px] top-1 w-4 h-4 rounded-full bg-white border-4 ${day.highlight ? 'border-yellow-400' : 'border-gray-200'}"></div>
+                    <div class="flex-1">
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <span class="text-xs font-bold text-gray-400 bg-gray-100 px-2 py-0.5 rounded">${event.time}</span>
+                                <h4 class="font-bold text-gray-800 mt-1">${event.title}</h4>
+                                <p class="text-xs text-gray-500 mt-0.5">${event.note}</p>
+                            </div>
+                        </div>
+                        <button onclick="openMap('${event.loc}')" 
+                                class="mt-3 w-full flex items-center justify-center gap-2 text-xs font-bold py-2 rounded-lg border border-gray-200 text-gray-600 hover:bg-blue-50 hover:text-blue-600 hover:border-blue-200 transition-colors">
+                            <i class="fa-solid fa-location-dot"></i> 導航至 ${event.loc.split(' ')[0]}...
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+
+            const dayCard = `
+                <div class="glass-card rounded-2xl p-5 shadow-sm transform transition hover:scale-[1.01] duration-300">
+                    <div class="flex items-center gap-3 mb-4 border-b border-gray-100 pb-3">
+                        <div class="w-10 h-10 rounded-full ${day.highlight ? 'bg-yellow-100 text-yellow-600' : 'bg-gray-100 ' + day.color} flex items-center justify-center text-lg">
+                            <i class="fa-solid ${day.icon}"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-lg text-gray-800">${day.date}</h3>
+                            <p class="text-xs text-gray-500 uppercase tracking-wide font-semibold">${day.theme}</p>
+                        </div>
+                    </div>
+                    <div class="space-y-1">
+                        ${eventsHtml}
+                    </div>
+                </div>
+            `;
+            container.innerHTML += dayCard;
+        });
+    </script>
+</body>
+</html>
